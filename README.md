@@ -10,6 +10,8 @@ Ce dépôt contient le TP3 de MERISE portant sur la gestion salariale.
 
 ## Contenu
 - MCD (Modèle Conceptuel de Données)
+- Code SQL
+  
 
 
 ## Outils utilisés
