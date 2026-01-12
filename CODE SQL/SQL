@@ -1,0 +1,69 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: salaire
+#------------------------------------------------------------
+
+CREATE TABLE salaire(
+        Numsal        Int NOT NULL ,
+        NomSal        Varchar (25) ,
+        PnomSal       Varchar (25) ,
+        Genre         Varchar (25) ,
+        DateNaissance Date ,
+        DateEmb       Date ,
+        NumPoste      Int ,
+        PRIMARY KEY (Numsal )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Poste
+#------------------------------------------------------------
+
+CREATE TABLE Poste(
+        NumPoste    Int NOT NULL ,
+        DesignPoste Varchar (25) ,
+        PRIMARY KEY (NumPoste )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Competences
+#------------------------------------------------------------
+
+CREATE TABLE Competences(
+        idComp              Int NOT NULL ,
+        intituleCompetences Varchar (25) ,
+        CodeNiv             Int ,
+        PRIMARY KEY (idComp )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: niveau_Competences
+#------------------------------------------------------------
+
+CREATE TABLE niveau_Competences(
+        CodeNiv   Int NOT NULL ,
+        DesignNiv Varchar (25) ,
+        PRIMARY KEY (CodeNiv )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Posseder
+#------------------------------------------------------------
+
+CREATE TABLE Posseder(
+        Numsal Int NOT NULL ,
+        idComp Int NOT NULL ,
+        PRIMARY KEY (Numsal ,idComp )
+)ENGINE=InnoDB;
+
+ALTER TABLE salaire ADD CONSTRAINT FK_salaire_NumPoste FOREIGN KEY (NumPoste) REFERENCES Poste(NumPoste);
+ALTER TABLE Competences ADD CONSTRAINT FK_Competences_CodeNiv FOREIGN KEY (CodeNiv) REFERENCES niveau_Competences(CodeNiv);
+ALTER TABLE Posseder ADD CONSTRAINT FK_Posseder_Numsal FOREIGN KEY (Numsal) REFERENCES salaire(Numsal);
+ALTER TABLE Posseder ADD CONSTRAINT FK_Posseder_idComp FOREIGN KEY (idComp) REFERENCES Competences(idComp);
